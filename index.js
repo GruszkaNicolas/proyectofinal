@@ -91,7 +91,7 @@ port: 465,
 secure: true,
 auth: {
     user: "nico.gruszka@gmail.com",
-    pass: "ombthlavbqztwhgw" 
+    pass: "" 
 }
 
 });
