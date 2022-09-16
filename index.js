@@ -7,21 +7,23 @@ const hbs = require('hbs');
 const mysql = require('mysql2');
 const nodemailer = require('nodemailer');
 
-//  const conexion = mysql.createConnection({
-//      host: process.env.host,
-//      user: process.env.user,
-//     password: process.env.password,
-//      database: process.env.database,
-//  });
+// Comentado para Deployar
 
-// conexion.connect(function(err) {
-//     if (err) {
-//    console.error(`error en la conexion: ${err.stack}`)
-//       return;
-//     }
-    
-//  console.log(`conectado a la base de datos ${process.env.database}`);
+//   const conexion = mysql.createConnection({
+//       host: process.env.host,
+//       user: process.env.user,
+//      password: process.env.password,
+//       database: process.env.database,
 //   });
+
+//  conexion.connect(function(err) {
+//      if (err) {
+//     console.error(`error en la conexion: ${err.stack}`)
+//        return;
+//      }
+    
+//   console.log(`conectado a la base de datos ${process.env.database}`);
+//    });
 
   app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -41,20 +43,29 @@ app.get('/nosotros', (req, res, next) => {
 res.render('nosotros')
 } );
 
+app.get('/enviado', (req, res, next) => {
+    res.render('enviado')
+    } );
+
 app.get('/experiencias', (req, res, next) => {
     res.render('experiencias', {
     style : 'experiencias.css'
    })
 
 } ); 
-
-
 app.get('/contacto', (req, res, next) => {
     res.render('contacto')
     } );
     
 app.post('/contacto',(req,res) => {
     const { nombre, email } = req.body
+    console.log(req.body);
+
+    
+let datos = {
+    nombre: nombre,
+    email: email,
+};
 
     if (nombre == '' || email == '') {
 
@@ -63,23 +74,24 @@ app.post('/contacto',(req,res) => {
         titulo: 'formulario para contacto' ,
         validacion
         });
-
 }
 else {
-
-
-
-    console.log(nombre)
-    console.log(email) 
+    // Comentado para deployar
+//  let sql = 'INSERT INTO proyecto.contacto SET ?';
+    
+//     conexion.query(sql, datos, (err, result) =>{
+//         if (err) throw err;
+//     })
 
 async function envioEmail(){
+
 let transporter = nodemailer.createTransport({
 host: 'smtp.gmail.com',
 port: 465,
 secure: true,
 auth: {
-    user: 'nico.gruszka@gmail.com',
-    pass: 'rhctpltamlldhdyg'
+    user: "nico.gruszka@gmail.com",
+    pass: "ombthlavbqztwhgw" 
 }
 
 });
@@ -97,12 +109,13 @@ res.render('enviado', {
     email
 })
 }
-envioEmail().catch(console.error) ;
 
-}
-    });
-    
-      
+envioEmail().catch(console.error) ;
+} }
+    );
+ 
 app.listen(PORT, () => {
- //  console.log(`El servidor esta trabajando en el puerto ${PORT}`);
+  // console.log(`El servidor esta trabajando en el puerto ${PORT}`);
 })
+
+
