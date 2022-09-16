@@ -9,21 +9,21 @@ const nodemailer = require('nodemailer');
 
 // Comentado para Deployar
 
-   const conexion = mysql.createConnection({
-       host: process.env.host,
-       user: process.env.user,
-      password: process.env.password,
-       database: process.env.database,
-   });
+//    const conexion = mysql.createConnection({
+//        host: process.env.host,
+//        user: process.env.user,
+//       password: process.env.password,
+//        database: process.env.database,
+//    });
 
-  conexion.connect(function(err) {
-      if (err) {
-     console.error(`error en la conexion: ${err.stack}`)
-        return;
-      }
+//   conexion.connect(function(err) {
+//       if (err) {
+//      console.error(`error en la conexion: ${err.stack}`)
+//         return;
+//       }
     
-   console.log(`conectado a la base de datos ${process.env.database}`);
-    });
+//    console.log(`conectado a la base de datos ${process.env.database}`);
+//     });
 
   app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -77,11 +77,11 @@ let datos = {
 }
 else {
     // Comentado para deployar
-  let sql = 'INSERT INTO proyecto.contacto SET ?';
+//   let sql = 'INSERT INTO proyecto.contacto SET ?';
     
-     conexion.query(sql, datos, (err, result) =>{
-         if (err) throw err;
-     })
+//      conexion.query(sql, datos, (err, result) =>{
+//          if (err) throw err;
+//      })
 
 async function envioEmail(){
 
@@ -115,7 +115,7 @@ envioEmail().catch(console.error) ;
     );
  
 app.listen(PORT, () => {
-   console.log(`El servidor esta trabajando en el puerto ${PORT}`);
+//    console.log(`El servidor esta trabajando en el puerto ${PORT}`);
 })
 
 
